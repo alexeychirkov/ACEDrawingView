@@ -297,6 +297,11 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if(self.isInactive) {
+        [super touchesBegan:touches withEvent:event];
+        return;
+    }
+
     if (self.draggableTextView.isEditing && self.drawTool != ACEDrawingToolTypeDraggableText) {
         [self.draggableTextView hideEditingHandles];
     }
@@ -336,6 +341,10 @@
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if(self.isInactive) {
+        [super touchesMoved:touches withEvent:event];
+        return;
+    }
     // save all the touches in the path
     UITouch *touch = [touches anyObject];
     
@@ -370,6 +379,10 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if(self.isInactive) {
+        [super touchesEnded:touches withEvent:event];
+        return;
+    }
     // make sure a point is recorded
     [self touchesMoved:touches withEvent:event];
     
